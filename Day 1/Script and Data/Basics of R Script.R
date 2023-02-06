@@ -133,10 +133,10 @@ df
 
 df$Pop_density >10
 
-#Find out which countries have population density greater than 0.5 and more than 10 writers
+#Find out which countries have population density greater than 0.5 and more than 50 writers
 df$Pop_density >0.5 & df$Writers>50
 
-#Find out which countries have population density greater than 0.5 OR more than 10 writers
+#Find out which countries have population density greater than 0.5 OR more than 50 writers
 df$Pop_density >0.5 | df$Writers>50
 
 # Data Handling -----------------------------------------------------------
