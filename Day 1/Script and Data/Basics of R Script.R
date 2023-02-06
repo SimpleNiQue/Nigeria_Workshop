@@ -3,7 +3,7 @@
 
 # Creating Data in R ------------------------------------------------------
 
-nation <- c("DRC", "Egypt", "Ethiopia", "Nigeria", "SA")
+nation = c("DRC", "Egypt", "Ethiopia", "Nigeria", "SA")
 popSize <- c(71, 87, 90, 183, 54)
 writers <- c(22, 34, 16, 130, 145)
 
@@ -18,6 +18,8 @@ class(writers)
 mixed <- c(45, "Egypt", 56, "Nigeria", "SA")
 class(mixed)
 
+#create an object called states and it contains these names: abuja, delta, jigawa
+states <- c("abuja", "delta", "jigawa")
 
 # Objects, functions and Operators ----------------------------------------
 
@@ -25,6 +27,7 @@ x <- c(1, 2, 3, 4, 5)
 x
 
 y <- c(2, 1, 2, 3, 1)
+y
 x + y
 
 # compute the mean of the vector x
@@ -53,7 +56,7 @@ round(2.71828, 4)
 #b. Generate another set of 1000 random numbers, using the mean and standard deviation of 0 and 1, respectively (standard normal).
 #c. Calculate the mean of the distributions generated in a and b above after trimming off 5% of the data.
 
-
+rnorm(n=100, mean = 5, sd = 3)
 # Data Types --------------------------------------------------------------
 
 #vectors
