@@ -1,41 +1,65 @@
 # 1 Set-up ----
 ###------PRACTICALS 1
 ##----REGRESSION MODELLING---------
-
 # my home Directory
-home_dir <- "C:/Users/SimpleNick/Documents/NPC/NIG_POP_Workshop/Nig_POP/Day 2"
-
-path <- home_dir
+path <- "C:/Users/SimpleNick/Documents/NPC/NIG_POP_Workshop/Nig_POP/Day\ 2"
 setwd(path)
+getwd()
 
 ##----Simple regression
 #-- Load data
 simple <- read.csv("simple_reg.csv")
 names(simple)
+head(simple)
+head(simple, 20)
+
+library(psych)
+headTail(simple) # view both first 4 and last 4 rows
+
+# install required packages
+installed.packages("ggdag")
+installed.packages("plotly")
+installed.packages("RColorBrewer")
+installed.packages("kableExtra")
+installed.packages("here")
+installed.packages("parallel")
+installed.packages("sf")
+installed.packages("raster")
+installed.packages("units")
+installed.packages("tidyverse")
+installed.packages("tmap")
+installed.packages("rstan")
+
+png("simple_scatter.png")
+plot(simple$income, simple$happiness,
+    xlab = "Income", ylab = "Happiness",
+    col = c("goldenrod", "purple"),
+    pch = "0")
+abline(a = 0, b = 1, lwd = 3.5)
+abline(v = 4)
 
 ##----Check for linearity and Normality
-with(simple,plot(happiness ~ income))
+with(simple, plot(happiness ~ income))
 hist(simple$happiness)
 ###
-fit <- lm(happiness ~ income, data=simple)
+fit <- lm(happiness ~ income, data = simple)
 summary(fit)
 plot(fit)
 
 #--: happiness = 0.204 + 0.713*income
 
-
+hist(simple$happiness)
 
 ##----Multiple regression
 #--Load data
 multiple <- read.csv("multi_reg.csv")
 names(multiple)
-fit2 <-lm(heart.disease ~ biking + smoking, data = multiple)
+fit2 <- lm(heart.disease ~ biking + smoking, data = multiple)
 summary(fit2)
 
-par(mfrow=c(2,2))
+par(mfrow = c(2, 2))
 plot(fit2)
-par(mfrow=c(1,1))
-
+par(mfrow = c(1, 1))
 
 #--: 
 # load libraries
@@ -54,7 +78,7 @@ dagify(
   mu ~ alpha,
   mu ~ beta,
   mu ~ X,
-  outcome = 'Y'
+  outcome = "Y"
 ) %>%
   tidy_dagitty(seed=11) %>% 
   mutate(color=c('data','parameter',  'parameter','parameter',  'parameter','data')) %>% 
