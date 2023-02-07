@@ -1,7 +1,11 @@
 # 1 Set-up ----
 ###------PRACTICALS 1
 ##----REGRESSION MODELLING---------
-path <- "C:/Users/oy1r22/OneDrive - University of Southampton/Desktop/Day2/"
+
+# my home Directory
+home_dir <- "C:/Users/SimpleNick/Documents/NPC/NIG_POP_Workshop/Nig_POP/Day 2"
+
+path <- home_dir
 setwd(path)
 
 ##----Simple regression
