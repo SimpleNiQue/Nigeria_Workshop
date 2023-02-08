@@ -6,6 +6,7 @@ path <- "C:/Users/SimpleNick/Documents/NPC/NIG_POP_Workshop/Nig_POP/Day\ 2"
 setwd(path)
 getwd()
 
+install.packages("plotly")
 ##----Simple regression
 #-- Load data
 simple <- read.csv("simple_reg.csv")
@@ -16,19 +17,19 @@ head(simple, 20)
 library(psych)
 headTail(simple) # view both first 4 and last 4 rows
 
-# install required packages
-installed.packages("ggdag")
-installed.packages("plotly")
-installed.packages("RColorBrewer")
-installed.packages("kableExtra")
-installed.packages("here")
-installed.packages("parallel")
-installed.packages("sf")
-installed.packages("raster")
-installed.packages("units")
-installed.packages("tidyverse")
-installed.packages("tmap")
-installed.packages("rstan")
+# # install required packages
+# installed.packages("ggdag")
+# installed.packages("plotly")
+# installed.packages("RColorBrewer")
+# installed.packages("kableExtra")
+# installed.packages("here")
+# installed.packages("parallel")
+# installed.packages("sf")
+# installed.packages("raster")
+# installed.packages("units")
+# installed.packages("tidyverse")
+# installed.packages("tmap")
+# installed.packages("rstan")
 
 png("simple_scatter.png")
 plot(simple$income, simple$happiness,
@@ -47,8 +48,44 @@ summary(fit)
 plot(fit)
 
 #--: happiness = 0.204 + 0.713*income
+png("simple_histogram_both.png")
+par(mfrow = c(1, 2))
+hist(simple$happiness, xlab = "Happiness", col = c("goldenrod"), main = "")
+abline(a = 0, b = 1)
+abline(v = 3.5, h = 30, lwd = 2.5)
 
-hist(simple$happiness)
+hist(simple$happiness, xlab="Income", col = c("purple"))
+abline(a = 0, b = 1)
+abline(v = 3.5, h = 30, lwd = 2.5)
+
+hist(simple$happiness, xlab="Income", col = c("purple"))
+abline(a = 0, b = 1)
+abline(v = mean(simple$happiness), lwd = 2.5, col = c("white"))
+abline(h = 30, lwd = 2.5, col = c("red"))
+
+# check for normality
+par(mfrow = c(1, 2))
+# par(mfrow = (c(2, 1)))
+hist(simple$happiness, main = "")
+hist(simple$income, main = "")
+
+
+# Regression Model Equation
+# Nominal:
+  # Happiness = intercept + income # nolint
+  # intercept is the minium happiness someone can have
+
+
+(yy <- 0.204 + 0.714 * 100000)
+# Linear Regression
+fit <- lm(happiness ~ income, data = simple)
+summary(fit)
+plot(fit)
+
+fit_b <- lm(income ~ happiness, data = simple)
+summary(fit_b)
+plot(fit_b)
+
 
 ##----Multiple regression
 #--Load data
@@ -56,6 +93,18 @@ multiple <- read.csv("multi_reg.csv")
 names(multiple)
 fit2 <- lm(heart.disease ~ biking + smoking, data = multiple)
 summary(fit2)
+
+headTail(multiple)
+
+par(mfrow = c(1, 1))
+plot(multiple$heart.disease, multiple$smoking,
+     xlab = "Heart Disease", ylab = "Smoking",
+     col = c("blue", "red"), pch = "9")
+
+plot(multiple$heart.disease, multiple$biking,
+     xlab = "Heart Disease", ylab = "Smoking",
+     col = c("gold", "purple"), pch = "9"
+    )
 
 par(mfrow = c(2, 2))
 plot(fit2)
